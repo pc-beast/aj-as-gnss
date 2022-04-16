@@ -35,25 +35,25 @@ A_a = [20 30 40 25];
 phi_a = (pi/45)*rand(4, 1);
 t = 0:(1/3069000):1;
 %prn = mod((nav_message()+cacode(1)),2);
-first_term = [];
+sigma_first_term = zeros(1, 3069001);
 for i =1:4
     signal = nav_message().*cacode(i);
     s_a = A_a(i)*(signal.*sin(2*pi*f*t + phi_a(i)));
     as = A_theta(:,i)*s_a;
-    first_term = [first_term [as]];
+    sigma_first_term = sigma_first_term + as;
 end
 sigma_first_term = sum(first_term);
 
 A_s = A_a*2;
 phi_s = phi_a - pi/8;
-second_term = [];
+sigma_second_term = zeros(1, 3069001);
 ang_spoofed = zeros(2, 4);
 A_phi = steervec(pos/lambda, ang_spoofed);
 for i =1:4
     signal = nav_message().*cacode(i);
     s_s = A_s(i)*(signal.*sin(2*pi*f*t + phi_s(i)));
-    as = A_phi(:,i)*s_a;
-    second_term = [second_term [as]];
+    as = A_phi(:,i)*s_s;
+    sigma_second_term = sigma_second_term + as;
 end
 sigma_second_term = sum(second_term);
 
