@@ -12,12 +12,10 @@ function r_t = get_signal()
     c = 3*10^8;
     lambda = c/f;
     pos = (0:0.002:0.038);
-    aoa_authentic = [50 80 45 20];
-    ang_authentic = [[aoa_authentic]; 0 0 0 0];
-%     A_theta = steervec(pos/lambda, ang_authentic);
-    A_theta = steeringvector(100, f, 20, 4, aoa_authentic);
+    aoa_authentic = [80 100 90 120];
+    A_theta = steeringvector(0.02, f, 20, 4, aoa_authentic);
     
-    A_a = [20 30 40 25];
+    A_a = [50 50 50 50];
     phi_a = (pi/45)*rand(4, 1);
     t = 0:(1/3069000):1;                   
     %prn = mod((nav_message()+cacode(1)),2);
@@ -38,7 +36,7 @@ function r_t = get_signal()
     sigma_second_term = zeros(1, 3069001);   % spoofed element 
     ang_spoofed = zeros(2, 4);
 %     A_phi = steervec(pos/lambda, ang_spoofed);
-    A_phi = steeringvector(100, f, 20, 4, zeros(1, 4));
+    A_phi = steeringvector(0.02, f, 20, 4, zeros(1, 4));
     
     for i =1:4 % n=4
         signal = nav_message().*cacode(i);
