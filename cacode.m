@@ -7,7 +7,6 @@ for i = 1:1000
     S = [S,I];
 end
 bitrate = 1023e3;
-disp(bitrate);
 T = length(S)/bitrate;
 N = n*length(S);  %total number of samples
 dt = T/N;
