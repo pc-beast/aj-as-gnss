@@ -18,10 +18,10 @@ for i=1:length(b)
     nav((i-1)*n+1:i*n) = -1;
   end
 end
-figure(2) 
-plot(t,nav); 
-xlabel('Time axis'); 
-ylabel('Amplitude'); 
-title('Navigation message'); 
-grid on 
+% figure(2) 
+% plot(t,nav); 
+% xlabel('Time axis'); 
+% ylabel('Amplitude'); 
+% title('Navigation message'); 
+% grid on 
 end

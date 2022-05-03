@@ -23,7 +23,7 @@ sVar = 1; % Variance of the amplitude of the sources
 % STEP b: Mixing the sources and getting the sensor signals %%%%%%%%%%%%%%
 % doa = [20; 50; 85; 110; 145]; %DOAs
 cSpeed = 3*10^8 ; % Speed of light
-dist = 0.02; % Sensors (i.e., antennas) spacing in meters
+dist = 0.2; % Sensors (i.e., antennas) spacing in meters
 
 % Constructing the Steering matrix
 % A = zeros(M, N);
@@ -41,7 +41,7 @@ x = get_signal();
 R = (x*x')/p; % Empirical covariance of the antenna data
 % STEP c: Estimating the covariance matrix of the sensor array %%%%%%%%%%%
 
-
+  
 % STEP d: Finding the noise subspace and estimating the DOAs %%%%%%%%%%%%%
 [V, D] = eig(R);
 noiseSub = V(:, 1:M-N); % Noise subspace of R

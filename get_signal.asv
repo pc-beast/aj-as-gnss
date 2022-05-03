@@ -3,9 +3,15 @@ function r_t = get_signal()
     % k = 8 since 4 original signals and 4 spoofed signals\
     rng(2); % for reproducability
     % 4 angles are 0 since they are from spoofers
+    d = 0.002;
     f = 1575.42*10^6; % frequency of gps signal
-    d = 0.2; % distance between antennas
-    aoa_authentic = [80 100 90 50];
+    T = 0:0.01:10;
+    d = 0.002; % distance between antennas
+    A = []; % steering matrix
+    c = 3*10^8;
+    lambda = c/f;
+    pos = (0:0.002:0.038);
+    aoa_authentic = [80 100 90 150];
     A_theta = steeringvector(d, f, 20, 4, aoa_authentic);
     
     A_a = [50 50 50 50];
@@ -29,7 +35,7 @@ function r_t = get_signal()
     sigma_second_term = zeros(1, 3069001);   % spoofed element 
     aoa_spoofed = [5 5 5 5];
 %     A_phi = steervec(pos/lambda, ang_spoofed);
-    A_phi = steeringvector(d, f, 20, 4, aoa_spoofed);
+    A_phi = steeringvector(d, f, 20, 4, aoa_spoofed));
     
     for i =1:4 % n=4
         signal = nav_message().*cacode(i);

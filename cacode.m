@@ -19,10 +19,10 @@ for i=1:length(S)
     x((i-1)*n+1:i*n) = -1;
   end
 end
-figure(1)
-plot(t,x);
-xlabel('Time axis'); 
-ylabel('Amplitude'); 
-title('C/A Code');
-xlim([0 1]);
+% figure(1)
+% plot(t,x);
+% xlabel('Time axis'); 
+% ylabel('Amplitude'); 
+% title('C/A Code');
+% xlim([0 1]);
 end
