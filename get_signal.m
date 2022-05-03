@@ -27,7 +27,7 @@ function r_t = get_signal()
     A_s = A_a*4;
     phi_s = phi_a - pi/8;
     sigma_second_term = zeros(1, 3069001);   % spoofed element 
-    aoa_spoofed = [5 5 5 5];
+    aoa_spoofed = [0 0 0 0];
 %     A_phi = steervec(pos/lambda, ang_spoofed);
     A_phi = steeringvector(d, f, 20, 4, aoa_spoofed);
     
