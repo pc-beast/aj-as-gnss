@@ -5,10 +5,10 @@ function r_t = get_signal()
     % 4 angles are 0 since they are from spoofers
     f = 1575.42*10^6; % frequency of gps signal
     d = 0.2; % distance between antennas
-    aoa_authentic = [35 40 45 67];
+    aoa_authentic = [20 40 60 80];
     A_theta = steeringvector(d, f, 20, 4, aoa_authentic);
     
-    A_a = [60 20 50 35];
+    A_a = [80 80 80 80];
     phi_a = (pi/45)*rand(4, 1);
     t = 0:(1/3069000):1;                   
     %prn = mod((nav_message()+cacode(1)),2);
@@ -24,11 +24,11 @@ function r_t = get_signal()
     
     %Spoofing
     %-------------------------------------------------------------------------
-    A_s = [90 90 90 90];
+    A_s = [120 120 120 120];
     phi_s = phi_a - pi/8;
     sigma_second_term = zeros(1, 3069001);   % spoofed element 
     aoa_spoofed = [5 5 5 5];
-%     A_phi = steervec(pos/lambda, ang_spoofed);
+%     A_ph1 = steervec(pos/lambda, ang_spoofed);
     A_phi = steeringvector(d, f, 20, 4, aoa_spoofed);
     
     for i =1:4 % n=4
@@ -49,4 +49,4 @@ function r_t = get_signal()
 %     xlabel('Time axis'); 
 %     ylabel('Amplitude'); 
 %     title('Received Signal'); 
-%     grid on 
+%     grid on

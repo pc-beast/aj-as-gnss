@@ -18,7 +18,7 @@ dist = 0.2; % Sensors (i.e., antennas) spacing in meters
 % Constructing the Steering matrix
 % A = zeros(M, N);
 % for k = 1:N
-%     A(:, k) = exp(-1i*2*pi*fc*dist*cosd(doa(k))*(1/cSpeed)*[0:M-1]'); 
+%     A(:, k) = exp(-1i*2*pi*fc*dist*cosd(doa(k))(1/cSpeed)[0:M-1]'); 
 % end
 
 noiseCoeff = 1; % Variance of added noise
@@ -37,11 +37,11 @@ R = (x*x')/p; % Empirical covariance of the antenna data
 [V, D] = eig(R);
 noiseSub = V(:, 1:M-N); % Noise subspace of R
 
-theta = 0:1:90; %Peak search
+theta = 0:1:82; %Peak search
 a = zeros(M, length(theta));
 res = zeros(length(theta), 1);
 for i = 1:length(theta)
-    a(:, i) = exp(-1i*2*pi*fc*dist*cosd(i)*(1/cSpeed)*[0:M-1]');
+    a(:, i) = exp(-1i*2*pi*fc*dist*cosd(i)(1/cSpeed)[0:M-1]');
     res(i, 1) = 1/(norm(a(:, i)'*noiseSub).^2);
 end
 
@@ -52,5 +52,5 @@ figure;
 plot(res);
 xlabel('Angle (deg)');
 ylabel('1/Norm^2');
-title ('Estimated of DOAs')
+title ('Estimated DOAs')
 grid;

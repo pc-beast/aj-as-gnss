@@ -30,3 +30,20 @@ figure();
 plot(phi,G_dB,'linewidth',2);legend('M=20,d=0.2');
 xlabel('Angle (\circ)');ylabel('Magnitude (dB)');
 grid on;
+
+%%
+freq_dopp = linspace(-5e3,5e3,301);          % Woodward ambiguity function
+WAF = zeros(length(signal),length(freq_dopp));
+for i=1:length(freq_dopp)
+    fasor = exp(-1j*2*pi*freq_dopp(i).*time_s)';
+    WAF(:,i) = fftshift(ifft(fft(fasor.*signal).*conj(SIGNAL)));
+end
+WAF = WAF/sqrt(length(signal));
+
+
+figure,
+        mesh(freq_dopp/1e3,time_s*1e3,abs(WAF).^2);
+        title('WAF');
+        xlabel('Doppler (kHz)');
+        ylabel('delay (ms)'); 
+
