@@ -7,7 +7,7 @@ ss=90;              % snapshot
 j=sqrt(-1);
 
 %% SIGNAL RECEIVED
-X=awgn(get_signal(), 25);
+X=awgn(get_signal(), 100);
 %% COVIARIANCE MATRIX
 R=X*X'/ss;
 Inv_Rx = inv(R);
@@ -15,7 +15,7 @@ d=0.2;
 fc=1575*10^6;
 
 A_s = steeringvector(d, fc, M, 4, [35 40 45 67]);
-A_i = steeringvector(d, fc, M, 1, 0);
+A_i = steeringvector(d, fc, M, 1, 5);
 As = [A_s(:, 1:4) A_i];
 f = [1 1 1 1 0]';
 W_opt=Inv_Rx*As*inv(As'*Inv_Rx*As)*f;  

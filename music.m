@@ -1,9 +1,6 @@
 % Direction of Arrival Estimation, i.e., Spatial Spectrum Estimation
 
 % MUSIC: Multiple Signal Classification
-clc;
-clear;
-delete(findall(0, 'Type', 'figure'));
 
 % STEP a: Simulating the Narrowband Sources %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 p = 1; % Number of time snapshots
@@ -14,14 +11,7 @@ M = 20; % Number of array elements, i.e., sensors or antennas
 N = 5; % Number of sources
 sVar = 1; % Variance of the amplitude of the sources
 
-% p snapshots of N narrowband sources with random amplitude of mean zero
-% and covariance 1
-% s = sqrt(sVar)*randn(N, p).*exp(1i*(2*pi*fc*repmat([1:p]/fs, N, 1)));
-% STEP a: Simulating the Narrowband Sources %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 % STEP b: Mixing the sources and getting the sensor signals %%%%%%%%%%%%%%
-% doa = [20; 50; 85; 110; 145]; %DOAs
 cSpeed = 3*10^8 ; % Speed of light
 dist = 0.2; % Sensors (i.e., antennas) spacing in meters
 
@@ -33,7 +23,8 @@ dist = 0.2; % Sensors (i.e., antennas) spacing in meters
 
 noiseCoeff = 1; % Variance of added noise
 % x = A*s + sqrt(noiseCoeff)*randn(M, p); % Sensor signals
-x = get_signal();
+% x = awgn(get_signal(), 5);
+x = antijam;
 % STEP b: Mixing the sources and getting the sensor signals %%%%%%%%%%%%%%
 
 
@@ -46,7 +37,7 @@ R = (x*x')/p; % Empirical covariance of the antenna data
 [V, D] = eig(R);
 noiseSub = V(:, 1:M-N); % Noise subspace of R
 
-theta = 0:1:180; %Peak search
+theta = 0:1:90; %Peak search
 a = zeros(M, length(theta));
 res = zeros(length(theta), 1);
 for i = 1:length(theta)
@@ -61,5 +52,5 @@ figure;
 plot(res);
 xlabel('Angle (deg)');
 ylabel('1/Norm^2');
-title ('Estimation of DOAs over the different noise variances')
+title ('Estimated of DOAs')
 grid;
