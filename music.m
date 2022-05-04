@@ -1,15 +1,14 @@
+function music(x)
 % Direction of Arrival Estimation, i.e., Spatial Spectrum Estimation
 
 % MUSIC: Multiple Signal Classification
 
 % STEP a: Simulating the Narrowband Sources %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 p = 1; % Number of time snapshots
-fs = 10^7; % Sampling frequency
 % fc = 10^6; % Center frequency of narrowband sources
 fc = 1575.42*10^6;
 M = 20; % Number of array elements, i.e., sensors or antennas
 N = 5; % Number of sources
-sVar = 1; % Variance of the amplitude of the sources
 
 % STEP b: Mixing the sources and getting the sensor signals %%%%%%%%%%%%%%
 cSpeed = 3*10^8 ; % Speed of light
@@ -24,7 +23,6 @@ dist = 0.2; % Sensors (i.e., antennas) spacing in meters
 noiseCoeff = 1; % Variance of added noise
 % x = A*s + sqrt(noiseCoeff)*randn(M, p); % Sensor signals
 % x = awgn(get_signal(), 5);
-x = anti_jam();
 % STEP b: Mixing the sources and getting the sensor signals %%%%%%%%%%%%%%
 
 
@@ -54,3 +52,4 @@ xlabel('Angle (deg)');
 ylabel('1/Norm^2');
 title ('Estimated DOAs')
 grid;
+end
