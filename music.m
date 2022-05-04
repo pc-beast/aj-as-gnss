@@ -24,7 +24,7 @@ dist = 0.2; % Sensors (i.e., antennas) spacing in meters
 noiseCoeff = 1; % Variance of added noise
 % x = A*s + sqrt(noiseCoeff)*randn(M, p); % Sensor signals
 % x = awgn(get_signal(), 5);
-x = antijam;
+x = anti_jam();
 % STEP b: Mixing the sources and getting the sensor signals %%%%%%%%%%%%%%
 
 
@@ -41,7 +41,7 @@ theta = 0:1:82; %Peak search
 a = zeros(M, length(theta));
 res = zeros(length(theta), 1);
 for i = 1:length(theta)
-    a(:, i) = exp(-1i*2*pi*fc*dist*cosd(i)(1/cSpeed)[0:M-1]');
+    a(:, i) = exp(-1i*2*pi*fc*dist*cosd(i)*(1/cSpeed)*[0:M-1]');
     res(i, 1) = 1/(norm(a(:, i)'*noiseSub).^2);
 end
 

@@ -1,6 +1,4 @@
-clc;
-clear;
-delete(findall(0, 'Type', 'figure'));
+function antijam = anti_jam()
 
 % STEP a: Simulating the Narrowband Sources %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 p = 1; % Number of time snapshots
@@ -14,19 +12,9 @@ t = 0:(1/3069000):1;
 
 %Jamming
 
-A_a=50;
-A_j = sqrt(A_a*A_a + 10);  %asssuming 10dB more power of jamming signal
-sigma_third_term = zeros(1, 3069001);   % jamming element 
-doa_jamming=5;
-A_phi = steeringvector(dist,fc,M,q,doa_jamming);
-
-for i =1:q % q = 2
-    s_j = A_j.*sin(200*pi*fc*t);
-    aj = A_phi(:,i)*s_j;
-    sigma_third_term = sigma_third_term + aj;
-end
-
-x = awgn(get_signal()+sigma_third_term,5);
+jamm = get_jamming();
+rs = get_signal();
+x = awgn(rs+jamm,5);
 % STEP b: Mixing the sources and getting the sensor signals %%%%%%%%%%%%%%
 
 % STEP c: Estimating the covariance matrix of the sensor array %%%%%%%%%%%
@@ -43,23 +31,9 @@ orth_proj=I-(jamsubspace*(conj(jamsubspace))')/det((noiseSub*(conj(noiseSub))'))
 herm=(conj(orth_proj))';
 
 antijam=herm*x;
-  
+plot(t, antijam);
+hold on;
+plot(t, rs);
+hold off;
 
-
-% theta = 0:1:180; %Peak search
-% a = zeros(M, length(theta));
-% res = zeros(length(theta), 1);
-% for i = 1:length(theta)
-%     a(:, i) = exp(-1i*2*pi*fc*dist*cosd(i)*(1/cSpeed)*[0:M-1]');
-%     res(i, 1) = 1/(norm(a(:, i)'*noiseSub).^2);
-% end
-% 
-% [resSorted, orgInd] = sort(res, 'descend');
-% DOAs = orgInd(1:q, 1);
-% 
-figure;
-plot(t,antijam);
-% xlabel('Angle (deg)');
-% ylabel('1/Norm^2');
-% title ('Estimation of DOAs over the different noise variances')
-grid;
+end
