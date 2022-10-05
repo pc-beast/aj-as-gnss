@@ -1,4 +1,4 @@
-function x_t, r_t = sig_gen(doa_authentic, doa_spoofed, doa_jamming, amplitudes_authentic, num_antennas)
+function x_t, r_t, rs = sig_gen(doa_authentic, doa_spoofed, doa_jamming, amplitudes_authentic, num_antennas)
   fc = 1575.42*10^6; % frequency
   M = num_antennas; % number of antennas
   q = 1; %number of jammers
