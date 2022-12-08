@@ -1,9 +1,9 @@
-function antijam = Anti_jam()
+function antijam = Anti_jam(x_t)
 
 % STEP a: Simulating the Narrowband Sources %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 p = 1; % Number of time snapshots
 fc = 1575.42*10^6;
-M = 5; % Number of array elements, i.e., sensors or antennas
+M = 10; % Number of array elements, i.e., sensors or antennas
 q = 1; % Number of jamming signals
 
 cSpeed = 3*10^8 ; % Speed of light
@@ -11,10 +11,7 @@ dist = 0.2; % Sensors (i.e., antennas) spacing in meters
 t = 0:(1/3069000):1;                   
 
 %Jamming
-
-jamm = get_jamming();
-rs = get_signal();
-x = awgn(rs+jamm,5);
+x = x_t
 % STEP b: Mixing the sources and getting the sensor signals %%%%%%%%%%%%%%
 
 % STEP c: Estimating the covariance matrix of the sensor array %%%%%%%%%%%
@@ -31,7 +28,7 @@ orth_proj=I-(jamsubspace*(conj(jamsubspace))')/det((noiseSub*(conj(noiseSub))'))
 herm=(conj(orth_proj))';
 
 antijam=herm*x;
-figure(3)
+%{figure(3)
 subplot(2,1,1)
 disp(size(antijam));
 plot(t, antijam,'g-');
@@ -42,5 +39,6 @@ plot(t, rs);
 legend on;
 % hold off;
 xlim([0 0.00001])
+%}
 
 end

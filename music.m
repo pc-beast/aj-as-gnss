@@ -1,4 +1,4 @@
-function music(x)
+function DOAs = music(x)
 % Direction of Arrival Estimation, i.e., Spatial Spectrum Estimation
 
 % MUSIC: Multiple Signal Classification
@@ -7,8 +7,8 @@ function music(x)
 p = 1; % Number of time snapshots
 % fc = 10^6; % Center frequency of narrowband sources
 fc = 1575.42*10^6;
-M = 5; % Number of array elements, i.e., sensors or antennas
-N = 5; % Number of sources
+M = 10; % Number of array elements, i.e., sensors or antennas
+N = 6; % Number of sources
 
 % STEP b: Mixing the sources and getting the sensor signals %%%%%%%%%%%%%%
 cSpeed = 3*10^8 ; % Speed of light
@@ -46,10 +46,13 @@ end
 [resSorted, orgInd] = sort(res, 'descend');
 DOAs = orgInd(1:N, 1);
 
+%{
 figure;
 plot(res);
 xlabel('Angle (deg)');
 ylabel('1/Norm^2');
 title ('Estimated DOAs')
 grid;
+%}
+
 end
