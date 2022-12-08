@@ -7,7 +7,7 @@ function music(x)
 p = 1; % Number of time snapshots
 % fc = 10^6; % Center frequency of narrowband sources
 fc = 1575.42*10^6;
-M = 20; % Number of array elements, i.e., sensors or antennas
+M = 5; % Number of array elements, i.e., sensors or antennas
 N = 5; % Number of sources
 
 % STEP b: Mixing the sources and getting the sensor signals %%%%%%%%%%%%%%

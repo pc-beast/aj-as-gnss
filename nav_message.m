@@ -1,15 +1,19 @@
 function nav = nav_message()
-n=50;        % number of bits
+n=10;        % number of bits
 %b = 2*(rand(1,n)>0.5)-1;
 rng(2); % for reproducability
 b = rand(1,n)>0.5;
-n = 3069000/50;
+n = 306900/100;
 bitrate = 50;
 %fs = 100; % 2*fm nyquist frequency
-T = length(b)/bitrate;
+
+T = (length(b)/bitrate);
 N = n*length(b);
 dt = T/N;
-t = 0:dt:T;
+%dt = 1/306900;
+%t = 0:2*dt:T/4;
+t = 0:(2/306900):0.25;
+%disp(length(t));
 nav = zeros(1,length(t));
 for i=1:length(b)
   if b(i)==1
@@ -18,6 +22,7 @@ for i=1:length(b)
     nav((i-1)*n+1:i*n) = -1;
   end
 end
+
 % figure(2) 
 % plot(t,nav); 
 % xlabel('Time axis'); 

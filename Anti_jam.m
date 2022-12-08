@@ -3,7 +3,7 @@ function antijam = Anti_jam()
 % STEP a: Simulating the Narrowband Sources %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 p = 1; % Number of time snapshots
 fc = 1575.42*10^6;
-M = 20; % Number of array elements, i.e., sensors or antennas
+M = 5; % Number of array elements, i.e., sensors or antennas
 q = 1; % Number of jamming signals
 
 cSpeed = 3*10^8 ; % Speed of light

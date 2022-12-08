@@ -3,14 +3,17 @@ n=3;
 b = importdata('codes_L1CA.mat');
 I = b(:,svnum).';
 S = [];
-for i = 1:1000
+for i = 1:10
     S = [S,I];
 end
-bitrate = 1023e3;
-T = length(S)/bitrate;
+bitrate = 1023e2/2;
+T = (length(S)/bitrate);
 N = n*length(S);  %total number of samples
 dt = T/N;
-t = 0:dt:T;
+%disp(dt);
+%dt = 1/306900;
+%t = 0:dt:T/4;
+t = 0:(2/306900):0.25;
 x = zeros(1,length(t));
 for i=1:length(S)
   if S(i)==1

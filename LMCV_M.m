@@ -1,7 +1,7 @@
 %% LCMV beamforming
 %% initial parameter
 close all;clear all;clc;
-M=20;               % array number
+M=5;               % array number
 N=5;                % number of sources
 ss=90;              % snapshot
 j=sqrt(-1);

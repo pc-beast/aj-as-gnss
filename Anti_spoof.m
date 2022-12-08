@@ -3,10 +3,10 @@ function antispoof = Anti_spoof()
 % STEP a: Simulating the Narrowband Sources %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 p = 1; % Number of time snapshots
 
-M = 20; % Number of array elements, i.e., sensors or antennas
+M = 5; % Number of array elements, i.e., sensors or antennas
 s = 1; % Number of jamming signals
 
-t = 0:(1/3069000):1;                   
+t = 0:(1/3069000):0.25;                   
 
 %Jamming
 
